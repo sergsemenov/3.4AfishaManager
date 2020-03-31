@@ -9,4 +9,8 @@ public class Afisha {
     private int id;
     private String title;
     private String genre;
+
+    public int getId() {
+        return id;
+    }
 }

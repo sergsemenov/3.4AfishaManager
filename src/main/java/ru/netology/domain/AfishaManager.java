@@ -1,33 +1,19 @@
 package ru.netology.domain;
 
+import ru.netology.repository.AfishaRepository;
+
 public class AfishaManager {
-    Afisha[] movies = {
-            new Afisha(1, "Terminator1", "sci-fi"),
-            new Afisha(2, "Terminator2", "sci-fi"),
-            new Afisha(3, "Terminator3", "tragedy"),
-            new Afisha(4, "Terminator4", "farce"),
-            new Afisha(5, "Terminator5", "nonsence"),
-            new Afisha(6, "Terminator6", "nonsence"),
-            new Afisha(7, "Terminator7", "nonsence"),
-            new Afisha(8, "Terminator8", "nonsence"),
-            new Afisha(9, "Terminator9", "nonsence"),
-            new Afisha(10, "Terminator10", "nonsence"),
-            new Afisha(11, "Terminator11", "nonsence"),
-            new Afisha(12, "Terminator12", "nonsence"),
-            new Afisha(13, "Terminator13", "nonsence"),
-            new Afisha(14, "Terminator14", "nonsence")
-    };
+    private AfishaRepository repository;
+    public AfishaManager(AfishaRepository repository) {
+        this.repository = repository;
+    }
 
     public void addMovie(Afisha movie) {
-        int moviesLength = movies.length;
-        Afisha[] tmpArray = new Afisha[moviesLength + 1];
-        System.arraycopy(movies, 0, tmpArray, 0, moviesLength);
-        int lastIndex = tmpArray.length - 1;
-        tmpArray[lastIndex] = movie;
-        movies = tmpArray;
+       repository.save(movie);
     }
 
     public Afisha[] getMovies(int howManyMoviesToShow) {
+        Afisha[] movies = repository.findAll();
         int moviesLength = movies.length;
         int feedMax = 10; //по умолчанию показываем столько
         if (howManyMoviesToShow <= 0 || howManyMoviesToShow > feedMax) { //если заказано 0 и меньше, или очень много,
