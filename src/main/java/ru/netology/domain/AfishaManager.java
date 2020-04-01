@@ -1,15 +1,18 @@
 package ru.netology.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.netology.repository.AfishaRepository;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class AfishaManager {
-    private AfishaRepository repository;
-    public AfishaManager(AfishaRepository repository) {
-        this.repository = repository;
-    }
+    private AfishaRepository repository = new AfishaRepository();
 
     public void addMovie(Afisha movie) {
-       repository.save(movie);
+        repository.save(movie);
     }
 
     public Afisha[] getMovies(int howManyMoviesToShow) {
@@ -34,4 +37,15 @@ public class AfishaManager {
         }
         return customAfisha;
     }
+
+    public Afisha[] showAll(){
+        Afisha[] movies = repository.findAll();
+        Afisha[] result = new Afisha[movies.length];
+        for (int i = 0; i < result.length; i++) {
+            int index = movies.length - i - 1;
+            result[i] = movies[index];
+        }
+        return result;
+    }
+
 }

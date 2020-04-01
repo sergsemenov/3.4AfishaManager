@@ -27,9 +27,8 @@ public class AfishaRepository {
 
     //    save - добавляет объект в массив
     public void save(Afisha movie) {
-        int moviesLength = movies.length;
-        Afisha[] tmpArray = new Afisha[moviesLength + 1];
-        System.arraycopy(movies, 0, tmpArray, 0, moviesLength);
+        Afisha[] tmpArray = new Afisha[movies.length + 1];
+        System.arraycopy(movies, 0, tmpArray, 0, movies.length);
         int lastIndex = tmpArray.length - 1;
         tmpArray[lastIndex] = movie;
         movies = tmpArray;
@@ -61,8 +60,11 @@ public class AfishaRepository {
 
     //    removeAll*
     void removeAll() {
-//        Afisha[] backupMovies = new Afisha[];
-//        System.arraycopy(movies, 0, backupMovies, 0, movies.length);
+        Afisha[] backupMovies = new Afisha[movies.length];
+        System.arraycopy(movies, 0, backupMovies, 0, movies.length);
+        for (Afisha backupMovie : backupMovies) {
+            System.out.println(backupMovie);
+        }
         movies = new Afisha[0];
     }
 }
