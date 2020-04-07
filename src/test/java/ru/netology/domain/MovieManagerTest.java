@@ -9,16 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 public class MovieManagerTest {
     private MovieManager manager = new MovieManager();
     private Movie movieToAdd = new Movie(1000, "T1000", "nonsence");
+    private Movie[] expected;
 
     @BeforeEach
-    void setUp () {
+    void setUp() {
         manager.addMovie(movieToAdd);
-    }
-
-    @Test
-    public void showAllNegative() {
-        Movie[] actual = manager.getLimited(-25);
-        Movie[] expected = {
+        expected = new Movie[]{
                 new Movie(1000, "T1000", "nonsence"),
                 new Movie(14, "Terminator14", "nonsence"),
                 new Movie(13, "Terminator13", "nonsence"),
@@ -30,24 +26,17 @@ public class MovieManagerTest {
                 new Movie(7, "Terminator7", "nonsence"),
                 new Movie(6, "Terminator6", "nonsence")
         };
+    }
+
+    @Test
+    public void showAllNegative() {
+        Movie[] actual = manager.getLimited(-25);
         assertArrayEquals(expected, actual);
     }
 
     @Test
     public void showMoreThanAll() {
         Movie[] actual = manager.getLimited(100);
-        Movie[] expected = {
-                new Movie(1000, "T1000", "nonsence"),
-                new Movie(14, "Terminator14", "nonsence"),
-                new Movie(13, "Terminator13", "nonsence"),
-                new Movie(12, "Terminator12", "nonsence"),
-                new Movie(11, "Terminator11", "nonsence"),
-                new Movie(10, "Terminator10", "nonsence"),
-                new Movie(9, "Terminator9", "nonsence"),
-                new Movie(8, "Terminator8", "nonsence"),
-                new Movie(7, "Terminator7", "nonsence"),
-                new Movie(6, "Terminator6", "nonsence")
-        };
         assertArrayEquals(expected, actual);
     }
 
@@ -68,18 +57,6 @@ public class MovieManagerTest {
     @Test
     public void showAllBetweenSizeAndDefault() {
         Movie[] actual = manager.getLimited(11);
-        Movie[] expected = {
-                new Movie(1000, "T1000", "nonsence"),
-                new Movie(14, "Terminator14", "nonsence"),
-                new Movie(13, "Terminator13", "nonsence"),
-                new Movie(12, "Terminator12", "nonsence"),
-                new Movie(11, "Terminator11", "nonsence"),
-                new Movie(10, "Terminator10", "nonsence"),
-                new Movie(9, "Terminator9", "nonsence"),
-                new Movie(8, "Terminator8", "nonsence"),
-                new Movie(7, "Terminator7", "nonsence"),
-                new Movie(6, "Terminator6", "nonsence")
-        };
         assertArrayEquals(expected, actual);
     }
 }
