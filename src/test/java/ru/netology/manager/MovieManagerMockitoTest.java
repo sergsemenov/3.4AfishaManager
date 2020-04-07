@@ -1,34 +1,35 @@
-package ru.netology.domain;
+package ru.netology.manager;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.netology.repository.AfishaRepository;
+import ru.netology.domain.Movie;
+import ru.netology.repository.MovieRepository;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 
 @ExtendWith(MockitoExtension.class)
-class AfishaManagerMockitoTest {
+class MovieManagerMockitoTest {
     @Mock
-    private AfishaRepository repository;
+    private MovieRepository repository;
     @InjectMocks
-    private AfishaManager manager;
-    Afisha first = new Afisha(333, "T333", "Mockito");
-    Afisha second = new Afisha(444, "T444", "Mockito");
-    Afisha third = new Afisha(555, "T555", "Mockito");
+    private MovieManager manager;
+    Movie first = new Movie(333, "T333", "Mockito");
+    Movie second = new Movie(444, "T444", "Mockito");
+    Movie third = new Movie(555, "T555", "Mockito");
 
     @Test
     void addMovieWithMock() {
-        Afisha[] returned = new Afisha[]{first, second, third};
+        Movie[] returned = new Movie[]{first, second, third};
         doReturn(returned).when(repository).findAll();
         doNothing().when(repository).save(third);
         manager.addMovie(third);
-        Afisha[] expected = new Afisha[]{third, second, first};
-        Afisha[] actual = manager.showAll();
+        Movie[] expected = new Movie[]{third, second, first};
+        Movie[] actual = manager.getAll();
         assertArrayEquals(expected, actual);
     }
 }

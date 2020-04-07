@@ -7,12 +7,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Afisha {
+public class Movie {
     private int id;
     private String title;
     private String genre;
 
-    public int getId() {
-        return id;
-    }
 }
